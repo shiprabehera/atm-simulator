@@ -22,7 +22,7 @@
     <div class="starter-template">
         <h1>ATM Simulator</h1>
         <h2>
-            <span th:text="'Welcome ! '"></span>
+            <span th:text="'Wtihdraw Cash ! '"></span>
         </h2>
     </div>
     <table id="keypad" cellpadding="5" cellspacing="3">
@@ -48,10 +48,9 @@
         </tr>
     </table>
     <div class="container">
-    <form  action="#" th:action="@{/login}"  method="post">
-        <p>Enter your account number: <input type="text" /></p>
-        <p>Enter your PIN: <input type="text"  /></p>
-    </form>
+        <form  action="#" th:action="@{/login}"  method="post">
+            <p>Enter amount to withdraw: <input type="text" /></p>
+        </form>
     </div>
     <div class="btn-group">
         <button>Submit</button>

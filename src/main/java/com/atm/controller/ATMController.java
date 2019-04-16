@@ -42,4 +42,15 @@ public class ATMController {
         return "menu";
     }
 
+    @GetMapping("/balance")
+    public String mainBalance(Model model) {
+        return "balance"; //view
+    }
+
+
+    @GetMapping("/withdraw")
+    public String menu(Model model) {
+        return "withdrawal"; //view
+    }
+
 }
