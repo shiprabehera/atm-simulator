@@ -39,6 +39,7 @@ public class ATMController {
 
     @PostMapping("/login")
     public String greetingSubmit() {
+
         return "menu";
     }
 
