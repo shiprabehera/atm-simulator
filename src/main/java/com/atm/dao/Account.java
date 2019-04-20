@@ -12,12 +12,16 @@ public class Account {
     @Id
     @Column(name = "account_no", nullable = false)
     private int accountNo;
+
     @Column(name = "pin", nullable = false)
     private int pin;
+
     @Column(name = "balance", nullable = false)
     private float balance;
+
     @Column(name = "account_type", nullable = false)
     private String type;
+
     @Column(name = "user_id", nullable = false)
     private int userId;
 

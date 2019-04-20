@@ -7,7 +7,7 @@ import com.atm.dao.Account;
 import java.util.List;
 
 @Repository
-public interface AccountDAO extends CrudRepository<Account, Integer>{
-    public List<Account> findByAccountNo(int accountNo);
+public interface AccountRepository extends CrudRepository<Account, Integer>{
+    //public List<Account> findByAccountNo(int accountNo);
 
 }

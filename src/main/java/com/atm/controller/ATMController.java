@@ -1,5 +1,8 @@
 package com.atm.controller;
 
+import com.atm.dao.Account;
+import com.atm.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,9 @@ import java.util.List;
 
 @Controller
 public class ATMController {
+
+    @Autowired
+    AccountService accountService;
 
     // inject via application.properties
     @Value("${welcome.message}")
@@ -52,6 +58,14 @@ public class ATMController {
     @GetMapping("/withdraw")
     public String menu(Model model) {
         return "withdrawal"; //view
+    }
+
+
+    @GetMapping("/accounts")
+    private String getAllAccounts(Model model) {
+        List<Account> accounts = accountService.getAllAccounts();
+        model.addAttribute("accounts", accounts);
+        return "welcome";
     }
 
 }
