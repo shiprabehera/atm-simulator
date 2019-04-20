@@ -23,4 +23,4 @@ CREATE TABLE accounts(
 );
 
 INSERT INTO accounts(account_no, pin, account_type, balance, user_id) VALUES
-    (2341567890, 4567, 'SAVINGS', 4000, 1);
+    (23456, 4567, 'SAVINGS', 4000, 1);
