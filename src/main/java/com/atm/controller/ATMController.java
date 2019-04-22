@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class ATMController {
     public String main(Model model) {
         model.addAttribute("message", message);
         model.addAttribute("tasks", tasks);
+        model.addAttribute("account", new Account());
 
         return "welcome"; //view
     }
@@ -47,27 +50,26 @@ public class ATMController {
     }
 
     @PostMapping("/login")
-    public String greetingSubmit(@RequestParam(name = "accountnum", required = true) Integer accNum,Model model) {
-
-        theAccount = accountService.getAccountByAccountNo(accNum);
-        if (accountService.getAllAccounts().contains(theAccount)) {
-            int custId = theAccount.getUserId();
-            model.addAttribute("Text", "Please choose an option, User " + custId);
-            return "menu";
-        }
-
-        else {
-
-            model.addAttribute("error", "Please enter the correct Account number");    
+    public String login(@ModelAttribute Account formAccount, Model model, HttpSession session) {
+        int result = accountService.checkLogin(formAccount);
+        if (result == 1) {
+            model.addAttribute("error", "Incorrect account number or pin");
+            System.out.println("Login error");
             return "welcome";
-            
+        }
+        else {
+            //int custId = theAccount.getUserId();
+            System.out.println("Login successful");
+            session.setAttribute("accountNum", formAccount.getAccountNo());
+
+            return "menu";
         }
     }
 
     @GetMapping("/balance")
-    public String mainBalance(Model model) {
+    public String mainBalance(Model model,  HttpSession session) {
         
-        float bal = theAccount.getBalance();
+        float bal = accountService.getAccountByAccountNo((int)session.getAttribute("accountNum")).getBalance();
         model.addAttribute("balance", bal);    
         return "balance"; //view
     }
@@ -84,6 +86,11 @@ public class ATMController {
         List<Account> accounts = accountService.getAllAccounts();
         model.addAttribute("accounts", accounts);
         return "welcome";
+    }
+
+    @GetMapping("/menu")
+    public String goToMenu() {
+        return "menu";
     }
 
 }

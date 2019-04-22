@@ -22,41 +22,44 @@
     <div class="starter-template">
         <h1>ATM Simulator</h1>
         <h2>
-            <span th:text="'Welcome! '"></span>
+            <span th:text="'Welcome! '"></span> <br/>
             <span th:if="${error != null}" th:text="${error}"></span>
         </h2>
     </div>
     <table id="keypad" cellpadding="5" cellspacing="3">
         <tr>
-            <td onclick="addCode('1');">1</td>
-            <td onclick="addCode('2');">2</td>
-            <td onclick="addCode('3');">3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
         </tr>
         <tr>
-            <td onclick="addCode('4');">4</td>
-            <td onclick="addCode('5');">5</td>
-            <td onclick="addCode('6');">6</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
         </tr>
         <tr>
-            <td onclick="addCode('7');">7</td>
-            <td onclick="addCode('8');">8</td>
-            <td onclick="addCode('9');">9</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
         </tr>
         <tr>
-            <td onclick="addCode('*');">*</td>
-            <td onclick="addCode('0');">0</td>
-            <td onclick="addCode('#');">#</td>
+            <td>*</td>
+            <td>0</td>
+            <td>#</td>
         </tr>
     </table>
     <div class="container">
-    <form  action="#" th:action="@{/login}"  method="post">
-        <p>Enter your account number: <input th:name="accountnum" type="text" /></p>
-        <p>Enter your PIN: <input type="password" /></p>
+    <form  action="#" th:action="@{/login}"  th:object="${account}" method="post">
+        <p>Enter your account number: <input th:field="*{accountNo}" type="text" id ="accountnum"/></p>
+        <p>Enter your PIN: <input th:field="*{pin}" type="text" id="pin"/></p>
+
+        <div class="btn-group">
+            <button type="submit" value="Submit">Submit</button>
+            <button type="reset" value="Reset" >Reset</button>
+        </div>
+    </form>
     </div>
-    <div class="btn-group">
-        <button type="submit" value="Submit">Submit</button>
-        <button>Reset</button>
-    </div>
+
     </form>
 
 
@@ -111,5 +114,20 @@
 <!-- /.container -->
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+
+<script type="text/javascript">
+        window.onload = function () {
+            var screen  = document.getElementById('accountnum'),
+                keypad  = document.getElementById('keypad'),
+                buttons = keypad.getElementsByTagName('td');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                    screen.value = screen.value + this.innerHTML;
+                    // Try to comment line below to see what happens
+                    return false;
+                };
+            }
+        }
+    </script>
 </body>
 </html>

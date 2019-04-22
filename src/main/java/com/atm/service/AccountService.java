@@ -19,8 +19,9 @@ public class AccountService {
         return accounts;
     }
 
-    public Account getAccountByAccountNo(int acc_num) {
-        return accountRepository.findByAccountNo(acc_num).get(0);
+    public Account getAccountByAccountNo(int accNo) {
+        Account account = accountRepository.findByAccountNo(accNo);
+        return account;
     }
 
     public void saveOrUpdate(Account account) {
@@ -30,5 +31,16 @@ public class AccountService {
     public void delete(int acc_num) {
         accountRepository.deleteById(acc_num);
     }
+
+    public int checkLogin(Account formAccount) {
+        Account account = getAccountByAccountNo(formAccount.getAccountNo());
+        if (account == null || account.getPin() != formAccount.getPin()) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
 
 }
