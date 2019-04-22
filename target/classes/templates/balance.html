@@ -29,7 +29,7 @@
 
     <div class="container">
         <form  action="#" th:action="@{/login}"  method="post">
-            <p>Account Balance: $1500 </p>
+            <p>Account Balance: <span th:text="${balance}"></span> </p>
             <p>Account Balance for Withdrawal: $1500 </p>
         </form>
     </div>
