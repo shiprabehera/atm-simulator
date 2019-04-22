@@ -22,7 +22,8 @@
     <div class="starter-template">
         <h1>ATM Simulator</h1>
         <h2>
-            <span th:text="'Welcome ! '"></span>
+            <span th:text="'Welcome! '"></span>
+            <span th:if="${error != null}" th:text="${error}"></span>
         </h2>
     </div>
     <table id="keypad" cellpadding="5" cellspacing="3">
@@ -49,72 +50,62 @@
     </table>
     <div class="container">
     <form  action="#" th:action="@{/login}"  method="post">
-        <p>Enter your account number: <input type="text" /></p>
-        <p>Enter your PIN: <input type="text"  /></p>
-    </form>
+        <p>Enter your account number: <input th:name="accountnum" type="text" /></p>
+        <p>Enter your PIN: <input type="password" /></p>
     </div>
     <div class="btn-group">
-        <button>Submit</button>
+        <button type="submit" value="Submit">Submit</button>
         <button>Reset</button>
     </div>
-<table>
-    <tr>
-
-        <td>
-            <span th:text="'Hello, ' + ${accounts.get(0).getBalance()}"></span>
-
-
-        </td>
-    </tr>
-</table>
+    </form>
 
 
     <style>
     .container {
-  width: 500px;
-  clear: both;
-}
+        width: 500px;
+        clear: both;
+    }
 
-.container input {
-  width: 100%;
-  clear: both;
-}
-body {
-	text-align:center;
-	background-color:#FFFFFF;
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-}
-#keypad {margin:auto; margin-top:20px;}
+    .container input {
+        width: 100%;
+        clear: both;
+    }
+    body {
+        text-align:center;
+        background-color:#FFFFFF;
+        font-family:Verdana, Arial, Helvetica, sans-serif;
+    }
+    #keypad {margin:auto; margin-top:20px;}
 
-#keypad tr td {
-	vertical-align:middle;
-	text-align:center;
-	border:1px solid #000000;
-	font-size:18px;
-	font-weight:bold;
-	width:40px;
-	height:30px;
-	cursor:pointer;
-	background-color:#666666;
-	color:#CCCCCC;}
-#keypad tr td:hover {background-color:#999999; color:#FFFF00;}
+    #keypad tr td {
+        vertical-align:middle;
+        text-align:center;
+        border:1px solid #000000;
+        font-size:18px;
+        font-weight:bold;
+        width:40px;
+        height:30px;
+        cursor:pointer;
+        background-color:#666666;
+        color:#CCCCCC;}
+    #keypad tr td:hover {background-color:#999999; color:#FFFF00;}
 
-.display {
-	width:130px;
-	margin:10px auto auto auto;
-	background-color:#000001;
-	color:#00FF00;
-	font-size:18px;
-	border:1px solid #999999;
-}
-#message {
-	text-align:center;
-	color:#009900;
-	font-size:14px;
-	font-weight:bold;
-	display:none;
-}
-</style>
+    .display {
+        width:130px;
+        margin:10px auto auto auto;
+        background-color:#000001;
+        color:#00FF00;
+        font-size:18px;
+        border:1px solid #999999;
+    }
+    #message {
+        text-align:center;
+        color:#009900;
+        font-size:14px;
+        font-weight:bold;
+        display:none;
+    }
+    </style>
 
 </main>
 <!-- /.container -->

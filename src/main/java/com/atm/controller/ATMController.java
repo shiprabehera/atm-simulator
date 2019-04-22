@@ -25,6 +25,8 @@ public class ATMController {
 
     private List<String> tasks = Arrays.asList("View Balance", "Withdraw", "Deposit", "Transfer", "Exit");
 
+    private String custName; 
+    private Account theAccount;
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("message", message);
@@ -38,19 +40,35 @@ public class ATMController {
     public String mainWithParam(
             @RequestParam(name = "name", required = false, defaultValue = "") String name, Model model) {
 
-        model.addAttribute("message", name);
+        custName = name;
 
+        model.addAttribute("message", custName);
         return "welcome"; //view
     }
 
     @PostMapping("/login")
-    public String greetingSubmit() {
+    public String greetingSubmit(@RequestParam(name = "accountnum", required = true) Integer accNum,Model model) {
 
-        return "menu";
+        theAccount = accountService.getAccountByAccountNo(accNum);
+        if (accountService.getAllAccounts().contains(theAccount)) {
+            int custId = theAccount.getUserId();
+            model.addAttribute("Text", "Please choose an option, User " + custId);
+            return "menu";
+        }
+
+        else {
+
+            model.addAttribute("error", "Please enter the correct Account number");    
+            return "welcome";
+            
+        }
     }
 
     @GetMapping("/balance")
     public String mainBalance(Model model) {
+        
+        float bal = theAccount.getBalance();
+        model.addAttribute("balance", bal);    
         return "balance"; //view
     }
 

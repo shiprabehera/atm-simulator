@@ -1,6 +1,6 @@
-#ATM Simlator
+# ATM Simlator
 
-### 1. How to start
+## 1. How to start
 
 ```shell
 $ git clone https://github.com/shiprabehera/atm-simulator.git

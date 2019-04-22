@@ -21,8 +21,9 @@
 
     <div class="starter-template">
         <h1>Main Menu</h1>
+        <h4 th:text="${Text}"></h4>
         <div class="btn-group">
-            <button>View Balance</button>
+            <button><a th:href="@{/balance}">View Balance</a></button>
             <button>Withdraw</button>
             <button>Deposit</button>
             <button>Transfer</button>
