@@ -19,5 +19,5 @@ public class AccountService {
         accountRepository.findAll().forEach(account -> accounts.add(account));
         return accounts;
     }
-    
+
 }
