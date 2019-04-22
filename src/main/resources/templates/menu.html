@@ -24,8 +24,8 @@
         <h4 th:text="${Text}"></h4>
         <div class="btn-group">
             <button><a th:href="@{/balance}">View Balance</a></button>
-            <button>Withdraw</button>
-            <button>Deposit</button>
+            <button><a th:href="@{/withdraw}">Withdraw</a></button>
+            <button><a th:href="@{/deposit}">Deposit</a></button>
             <button><a th:href="@{/transfer}">Transfer</a></button>
             <button><a th:href="@{/}">Exit</a></button>
         </div>

@@ -77,7 +77,8 @@ public class ATMController {
 
     @GetMapping("/withdraw")
     public String menu(Model model) {
-        return "withdrawal"; //view
+        model.addAttribute("account", new Account());
+        return "withdraw"; //view
     }
 
 
@@ -109,6 +110,36 @@ public class ATMController {
             model.addAttribute("message", "Low balance. Could not transfer. ");
         }
         return "transfer";
+    }
+
+    @PostMapping("/withdraw")
+    public String withdrawMoney(@ModelAttribute Account account, HttpSession session, Model model) {
+        boolean result = accountService.withdrawMoney((Integer)session.getAttribute("accountNum"),
+                account.getBalance());
+        if (result) {
+            model.addAttribute("message", "You withdrew $" + account.getBalance());
+        } else {
+            model.addAttribute("message", "Low balance. Could not withdraw. ");
+        }
+        return "withdraw";
+    }
+
+    @GetMapping("/deposit")
+    public String deposit(Model model) {
+        model.addAttribute("account", new Account());
+        return "deposit"; //view
+    }
+
+    @PostMapping("/deposit")
+    public String depositMoney(@ModelAttribute Account account, HttpSession session, Model model) {
+        boolean result = accountService.depositMoney((Integer)session.getAttribute("accountNum"),
+                account.getBalance());
+        if (result) {
+            model.addAttribute("message", "You deposited $" + account.getBalance());
+        } else {
+            model.addAttribute("message", "Error while depositing.");
+        }
+        return "deposit";
     }
 
 }

@@ -42,12 +42,18 @@ public class AccountService {
         }
     }
 
+    public boolean checkIfEnough(Account account, float amount) {
+        float remaining = account.getBalance() - amount;
+        if (remaining >= 0) {
+            return true;
+        }
+        return false;
+    }
     public boolean makeTransfer(int originAccNo, int targetAccNo, float amount) {
         Account origAccount = getAccountByAccountNo(originAccNo);
         Account targetAccount = getAccountByAccountNo(targetAccNo);
-        float remaining = origAccount.getBalance() - amount;
-        if (remaining >= 0) {
-            origAccount.setBalance(remaining);
+        if (checkIfEnough(origAccount, amount)) {
+            origAccount.setBalance(origAccount.getBalance() - amount);
             targetAccount.setBalance(targetAccount.getBalance() + amount);
             saveOrUpdate(origAccount);
             saveOrUpdate(targetAccount);
@@ -55,6 +61,23 @@ public class AccountService {
         } else {
             return false;
         }
+    }
+
+    public boolean withdrawMoney(int accountNo, float amount) {
+        Account account = getAccountByAccountNo(accountNo);
+        if (checkIfEnough(account, amount)) {
+            account.setBalance(account.getBalance() - amount);
+            saveOrUpdate(account);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean depositMoney(int accountNo, float amount) {
+        Account account = getAccountByAccountNo(accountNo);
+        account.setBalance(account.getBalance() + amount);
+        saveOrUpdate(account);
+        return true;
     }
 
 
