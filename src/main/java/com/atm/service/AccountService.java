@@ -42,5 +42,20 @@ public class AccountService {
         }
     }
 
+    public boolean makeTransfer(int originAccNo, int targetAccNo, float amount) {
+        Account origAccount = getAccountByAccountNo(originAccNo);
+        Account targetAccount = getAccountByAccountNo(targetAccNo);
+        float remaining = origAccount.getBalance() - amount;
+        if (remaining >= 0) {
+            origAccount.setBalance(remaining);
+            targetAccount.setBalance(targetAccount.getBalance() + amount);
+            saveOrUpdate(origAccount);
+            saveOrUpdate(targetAccount);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

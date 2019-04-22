@@ -20,7 +20,11 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>View Balance</h1>
+        <h1>Transfer</h1>
+        <h2>
+            <span th:if="${message != null}" th:text="${message}"></span>
+        </h2>
+
         <div class="btn-group">
             <button> <a th:href="@{/menu}"> Main Menu </a></button>
             <button> <a th:href="@{/}">Exit </a></button>
@@ -28,9 +32,14 @@
     </div>
 
     <div class="container">
-        <form  action="#" th:action="@{/login}"  method="post">
-            <p>Account Balance: <span th:text="${balance}"></span> </p>
-            <p>Account Balance for Withdrawal: <span th:text="${balance}"></span> </p>
+        <form  action="#" th:action="@{/transfer}"  th:object="${account}" method="post">
+            <p>Enter target account number: <input th:field="*{accountNo}" type="text" id ="accountnum"/></p>
+            <p>Enter amount to transfer: <input th:field="*{balance}" type="text" id="amount"/></p>
+
+            <div class="btn-group">
+                <button type="submit" value="Submit">Submit</button>
+                <button type="reset" value="Reset" >Reset</button>
+            </div>
         </form>
     </div>
     <style>

@@ -93,4 +93,22 @@ public class ATMController {
         return "menu";
     }
 
+    @GetMapping("/transfer")
+    public String goToTransfer(Model model) {
+        model.addAttribute("account", new Account());
+        return "transfer";
+    }
+
+    @PostMapping("/transfer")
+    public String makeTransfer(@ModelAttribute Account targetAccount, HttpSession session, Model model) {
+        boolean result = accountService.makeTransfer((Integer)session.getAttribute("accountNum"),
+                targetAccount.getAccountNo(), targetAccount.getBalance());
+        if (result) {
+            model.addAttribute("message", "Transfer was successful");
+        } else {
+            model.addAttribute("message", "Low balance. Could not transfer. ");
+        }
+        return "transfer";
+    }
+
 }
