@@ -23,7 +23,7 @@
         <h1>Deposit Money</h1>
         <div class="btn-group">
             <button> <a th:href="@{/menu}"> Main Menu </a></button>
-            <button> <a th:href="@{/}">Exit </a></button>
+            <button> <a th:href="@{/logout}">Exit </a></button>
         </div>
     </div>
     <table id="keypad" cellpadding="5" cellspacing="3">
@@ -42,11 +42,6 @@
             <td>8</td>
             <td>9</td>
         </tr>
-        <tr>
-            <td>*</td>
-            <td>0</td>
-            <td>#</td>
-        </tr>
     </table>
     <div class="container">
         <form  action="#" th:action="@{/deposit}"  th:object="${account}" method="post">
@@ -54,8 +49,8 @@
             <span th:if="${message != null}" th:text="${message}"></span>
             <br>
             <div class="btn-group">
-                <button type="submit" value="Submit">Submit</button>
-                <button type="reset" value="Reset" >Reset</button>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset" />
             </div>
         </form>
     </div>
@@ -86,11 +81,11 @@
         border:1px solid #000000;
         font-size:18px;
         font-weight:bold;
-        width:40px;
-        height:30px;
+        width:80px;
+        height:60px;
         cursor:pointer;
-        background-color:#666666;
-        color:#CCCCCC;}
+        background-color:#009900;
+        color:#FFFFFF;}
     #keypad tr td:hover {background-color:#999999; color:#FFFF00;}
 
     .display {
@@ -114,6 +109,21 @@
 <!-- /.container -->
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+
+<script type="text/javascript">
+        window.onload = function () {
+            var screen  = document.getElementById('balance'),
+                keypad  = document.getElementById('keypad'),
+                buttons = keypad.getElementsByTagName('td');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                    screen.value = screen.value + this.innerHTML;
+                    // Try to comment line below to see what happens
+                    //return false;
+                };
+            }
+        }
+</script>
 
 </body>
 </html>

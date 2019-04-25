@@ -100,6 +100,14 @@ public class ATMController {
         return "transfer";
     }
 
+    @GetMapping("/logout")
+    public String logout(Model model,HttpSession session) {
+        session.invalidate();
+        model.asMap().clear();
+        model.addAttribute("account", new Account());
+        return "welcome";
+      }
+
     @PostMapping("/transfer")
     public String makeTransfer(@ModelAttribute Account targetAccount, HttpSession session, Model model) {
         boolean result = accountService.makeTransfer((Integer)session.getAttribute("accountNum"),
