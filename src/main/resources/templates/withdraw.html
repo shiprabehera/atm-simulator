@@ -40,7 +40,7 @@
             <span th:if="${message != null}" th:text="${message}"></span>
             <br>
             <div class="btn-group">
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" onclick="dispenser()"/>
                 <input type="reset" value="Reset" />
             </div>
         </form>
@@ -50,6 +50,16 @@
     </div>
 
 
+
+    <script>
+
+        var value = document.getElementById(btn1);
+        function dispenser()
+        {
+            alert('Cash is dispensed below');
+        }
+
+    </script>
 
     <style>
     .container {
