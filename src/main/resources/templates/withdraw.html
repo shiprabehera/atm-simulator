@@ -44,9 +44,11 @@
                 <input type="reset" value="Reset" />
             </div>
         </form>
+        <!--TODO: below line works but not the alert function-->
+        <!--<span th:text="${session.accountNum}"></span> -->
+        <button onclick="alert('Account number: '+ String(/*[[${(int)#session.getAttribute('accountNum')}]]*/) )"> Print Receipt</button>
     </div>
 
-    </form>
 
 
     <style>

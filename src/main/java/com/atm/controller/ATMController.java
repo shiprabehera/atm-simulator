@@ -76,8 +76,10 @@ public class ATMController {
 
 
     @GetMapping("/withdraw")
-    public String menu(Model model) {
+    public String menu(Model model, HttpSession session) {
         model.addAttribute("account", new Account());
+        int accnum = (int)session.getAttribute("accountNum");
+        model.addAttribute("accnum", accnum);
         return "withdraw"; //view
     }
 

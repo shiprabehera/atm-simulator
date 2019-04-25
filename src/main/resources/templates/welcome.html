@@ -60,7 +60,7 @@
     <form  action="#" th:action="@{/login}"  th:object="${account}" method="post">
         <label for="numpadButton">Enter your account number: </label>
         <div class="input-group">
-        <input th:field="*{accountNo}" type="text" class="form-control" id ="numpadButton" aria-describedby="numpadButton-btn" maxlength="10"/>
+        <input th:field="*{accountNo}" type="number" class="form-control" id ="numpadButton" aria-describedby="numpadButton-btn" maxlength="10"/>
         <span class="input-group-btn">
 			<button class="btn btn-default" id="numpadButton-btn" type="button"><i class="fa fa-th"></i></button>
 		</span>
