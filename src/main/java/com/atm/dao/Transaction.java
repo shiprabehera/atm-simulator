@@ -1,11 +1,19 @@
 package com.atm.dao;
 
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+
+/**
+ * Transaction class that can be mapped to the Transactions table in the database
+ * Design Pattern: This is the Model part of the MVC pattern
+ * @author Shipra Behera
+ */
 
 @Entity
 @Table(name = "Transactions")
 public class Transaction {
+    //primary key which is auto incremented
     @Id @GeneratedValue (strategy=GenerationType.IDENTITY)
     @Column(name = "transaction_id", nullable = false)
     private int transactionId;

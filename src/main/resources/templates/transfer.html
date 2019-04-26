@@ -33,7 +33,7 @@
 
     <div class="container">
         <form  action="#" th:action="@{/transfer}"  th:object="${account}" method="post">
-            <p>Enter target account number: <input th:field="*{accountNo}" type="text" id ="accountnum"/></p>
+            <p>Enter target account number: <input placeholder="enter amount to transfer" th:field="*{accountNo}" type="text" id ="accountnum"/></p>
             <p>Enter amount to transfer: <input th:field="*{balance}" type="text" id="amount"/></p>
 
             <div class="btn-group">

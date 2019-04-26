@@ -45,7 +45,7 @@
     </table>
     <div class="container">
         <form  action="#" th:action="@{/deposit}"  th:object="${account}" method="post">
-            <p>Enter amount to deposit: <input th:field="*{balance}" type="text" id ="balance"/></p>
+            <p>Enter amount to deposit: <input placeholder="enter amount to deposit" th:field="*{balance}" type="text" id ="balance"/></p>
             <span th:if="${message != null}" th:text="${message}"></span>
             <br>
             <div class="btn-group">

@@ -5,10 +5,17 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 
+/**
+ * Account class that can be mapped to the Accounts table in the database
+ * Design Pattern: This is the Model part of the MVC pattern
+ * @author Shipra Behera
+ */
+
 @Entity
 @Table(name = "Accounts")
 public class Account {
 
+    //@Id annotation marks the primary key field
     @Id
     @Column(name = "account_no", nullable = false)
     private int accountNo;
