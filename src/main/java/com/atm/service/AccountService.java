@@ -2,9 +2,12 @@ package com.atm.service;
 
 import com.atm.dao.Account;
 import com.atm.dao.AccountRepository;
+import com.atm.dao.Transaction;
+import com.atm.dao.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 public class AccountService {
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    TransactionRepository transactionRepository;
 
     public List<Account> getAllAccounts() {
         List<Account> accounts = new ArrayList<Account>();
@@ -57,6 +62,16 @@ public class AccountService {
             targetAccount.setBalance(targetAccount.getBalance() + amount);
             saveOrUpdate(origAccount);
             saveOrUpdate(targetAccount);
+            Transaction t = new Transaction();
+            t.setAccountNo(originAccNo);
+            t.setTime(new Timestamp(new Date().getTime()));
+            t.setType("transfer from");
+            transactionRepository.save(t);
+            t.setAccountNo(targetAccNo);
+            t.setTime(new Timestamp(new Date().getTime()));
+            t.setType("transfer to");
+            transactionRepository.save(t);
+
             return true;
         } else {
             return false;
@@ -68,6 +83,11 @@ public class AccountService {
         if (checkIfEnough(account, amount)) {
             account.setBalance(account.getBalance() - amount);
             saveOrUpdate(account);
+            Transaction t = new Transaction();
+            t.setAccountNo(accountNo);
+            t.setTime(new Timestamp(new Date().getTime()));
+            t.setType("withdraw");
+            transactionRepository.save(t);
             return true;
         }
         return false;
@@ -77,6 +97,11 @@ public class AccountService {
         Account account = getAccountByAccountNo(accountNo);
         account.setBalance(account.getBalance() + amount);
         saveOrUpdate(account);
+        Transaction t = new Transaction();
+        t.setAccountNo(accountNo);
+        t.setTime(new Timestamp(new Date().getTime()));
+        t.setType("deposit");
+        transactionRepository.save(t);
         return true;
     }
 

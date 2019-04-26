@@ -26,3 +26,13 @@ INSERT INTO accounts(account_no, pin, account_type, balance, user_id) VALUES
     (23456, 1212, 'SAVINGS', 4112, 1);
 INSERT INTO accounts(account_no, pin, account_type, balance, user_id) VALUES
     (76345, 8001, 'CHECKING', 5234, 2);
+
+DROP TABLE IF EXISTS transactions;
+
+CREATE TABLE transactions(
+ transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+ type VARCHAR(20),
+ transaction_time TIMESTAMP,
+ account_no BIGINT,
+ foreign key (account_no) references accounts(account_no)
+);
