@@ -53,7 +53,15 @@ public class ATMController {
     public String login(@ModelAttribute Account formAccount, Model model, HttpSession session) {
         int result = accountService.checkLogin(formAccount);
         if (result == 1) {
-            model.addAttribute("error", "Incorrect account number or pin");
+            model.addAttribute("error", "Account number does not exist");
+            System.out.println("Login error");
+            return "welcome";
+        } else if (result == 2) {
+            model.addAttribute("error", "Incorrect pin");
+            System.out.println("Login error");
+            return "welcome";
+        } else if (result == 3) {
+            model.addAttribute("error", "Account locked");
             System.out.println("Login error");
             return "welcome";
         }
@@ -61,7 +69,6 @@ public class ATMController {
             //int custId = theAccount.getUserId();
             System.out.println("Login successful");
             session.setAttribute("accountNum", formAccount.getAccountNo());
-
             return "menu";
         }
     }

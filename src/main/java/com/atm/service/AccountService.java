@@ -39,13 +39,28 @@ public class AccountService {
 
     public int checkLogin(Account formAccount) {
         Account account = getAccountByAccountNo(formAccount.getAccountNo());
-        if (account == null || account.getPin() != formAccount.getPin()) {
+        if (account == null) {
             return 1;
-        }
-        else {
+        } else if (account.getLocked() == 1) {
+            return 3;
+        } else if (account.getPin() != formAccount.getPin()) {
+                if (account.getIncorrectAttempts() < 2) {
+                    account.setIncorrectAttempts(account.getIncorrectAttempts() + 1);
+                    saveOrUpdate(account);
+                    return 2;
+                } else {
+                    account.setIncorrectAttempts(account.getIncorrectAttempts() + 1);
+                    account.setLocked(1);
+                    saveOrUpdate(account);
+                    return 3;
+                }
+
+        } else {
             return 0;
         }
+
     }
+
 
     public boolean checkIfEnough(Account account, float amount) {
         float remaining = account.getBalance() - amount;

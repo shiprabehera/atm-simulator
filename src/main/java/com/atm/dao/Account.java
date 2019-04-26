@@ -25,6 +25,12 @@ public class Account {
     @Column(name = "user_id", nullable = false)
     private int userId;
 
+    @Column(name = "locked", nullable = false)
+    private int locked;
+
+    @Column(name = "incorrect_attempts", nullable = false)
+    private int incorrectAttempts;
+
     //getters and setters
     public int getAccountNo() {
         return accountNo;
@@ -66,5 +72,19 @@ public class Account {
         this.userId = userId;
     }
 
+    public int getLocked() {
+        return locked;
+    }
 
+    public void setLocked(int locked) {
+        this.locked = locked;
+    }
+
+    public int getIncorrectAttempts() {
+        return incorrectAttempts;
+    }
+
+    public void setIncorrectAttempts(int incorrectAttempts) {
+        this.incorrectAttempts = incorrectAttempts;
+    }
 }

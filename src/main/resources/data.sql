@@ -19,6 +19,8 @@ CREATE TABLE accounts(
  account_type VARCHAR(10),
  balance REAL,
  user_id INT,
+ locked BIT NOT NULL DEFAULT 0,
+ incorrect_attempts INT DEFAULT 0,
  foreign key (user_id) references users(id)
 );
 
