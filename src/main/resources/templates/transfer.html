@@ -37,9 +37,10 @@
             <p>Enter amount to transfer: <input th:field="*{balance}" type="text" id="amount"/></p>
 
             <div class="btn-group">
-                <button type="submit" value="Submit">Submit</button>
-                <button type="reset" value="Reset" >Reset</button>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset" />
             </div>
+            <button onclick="printReceipt()"> Print Receipt</button>
         </form>
     </div>
     <style>
@@ -93,5 +94,19 @@ body {
 <!-- /.container -->
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<script th:inline="javascript">
+
+
+/*<![CDATA[*/
+function printReceipt() {
+
+    var accountNum = /*[[${accountNo}]]*/ 'default';
+    var balance = /*[[${balance}]]*/ 'default';
+    var transferred = /*[[${transferred}]]*/ 'default';
+    alert('Account number: '+ accountNum + '\n Last transaction: $' + transferred + '\n Balance: $' + balance);
+    }
+
+/*]]>*/
+</script>
 </body>
 </html>

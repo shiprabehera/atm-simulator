@@ -52,7 +52,9 @@
                 <input type="submit" value="Submit"/>
                 <input type="reset" value="Reset" />
             </div>
+            <button onclick="printReceipt()"> Print Receipt</button>
         </form>
+
     </div>
 
     </form>
@@ -124,6 +126,18 @@
             }
         }
 </script>
+<script th:inline="javascript">
 
+
+/*<![CDATA[*/
+function printReceipt() {
+
+    var accountNum = /*[[${accountNum}]]*/ 'default';
+    var balance = /*[[${balance}]]*/ 'default';
+    alert('Account number: '+ accountNum + '\n Balance: $' + balance);
+    }
+
+/*]]>*/
+</script>
 </body>
 </html>

@@ -36,5 +36,6 @@ CREATE TABLE transactions(
  type VARCHAR(20),
  transaction_time TIMESTAMP,
  account_no BIGINT,
+ amount REAL,
  foreign key (account_no) references accounts(account_no)
 );

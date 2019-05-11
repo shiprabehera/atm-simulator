@@ -38,4 +38,5 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
      * @return
      */
     List<Transaction> findByAccountNo(int accountNo);
+    Transaction findTopByOrderByTransactionIdDesc();
 }

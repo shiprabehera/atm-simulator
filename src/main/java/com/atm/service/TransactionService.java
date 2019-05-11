@@ -23,4 +23,9 @@ public class TransactionService {
     public void save(Transaction transaction) {
         transactionRepository.save(transaction);
     }
+
+    public Transaction getTransaction() {
+        Transaction t = transactionRepository.findTopByOrderByTransactionIdDesc();
+        return t;
+    }
 }

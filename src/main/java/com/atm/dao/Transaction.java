@@ -27,6 +27,16 @@ public class Transaction {
     @Column(name = "account_no", nullable = false)
     private int accountNo;
 
+    @Column(name = "amount", nullable = false)
+    private float amount;
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
     //getters and setters
 
     public int getTransactionId() {

@@ -131,11 +131,13 @@ public class AccountService {
             transaction.setAccountNo(originAccNo);
             transaction.setTime(new Timestamp(new Date().getTime()));
             transaction.setType("transfer from");
+            transaction.setAmount(amount);
             transactionRepository.save(transaction);
             Transaction transaction2 = new Transaction();
             transaction2.setAccountNo(targetAccNo);
             transaction2.setTime(new Timestamp(new Date().getTime()));
             transaction2.setType("transfer to");
+            transaction2.setAmount(amount);
             transactionRepository.save(transaction2);
 
             return true;
@@ -161,6 +163,7 @@ public class AccountService {
             transaction.setAccountNo(accountNo);
             transaction.setTime(new Timestamp(new Date().getTime()));
             transaction.setType("withdraw");
+            transaction.setAmount(amount);
             transactionRepository.save(transaction);
             return true;
         }
@@ -183,9 +186,14 @@ public class AccountService {
         transaction.setAccountNo(accountNo);
         transaction.setTime(new Timestamp(new Date().getTime()));
         transaction.setType("deposit");
+        transaction.setAmount(amount);
         transactionRepository.save(transaction);
         return true;
     }
 
+    public float getBalance(int accountNum) {
+        Account account = getAccountByAccountNo(accountNum);
+        return account.getBalance();
+    }
 
 }
